@@ -26,7 +26,7 @@ Fuelled by curiosity, I approach challenges with a blend of analytical rigor and
 
 ## Let's Connect
 
-I'm always eager to connect with individuals who share a passion for data, technology, and the broader spectrum of knowledge. Whether you're interested in discussing the latest data trends or delving into philosophical debates, I welcome the opportunity to connect. Explore my [portfolio](tiagovportela.github.io), and let's embark on a journey of innovation and discovery together.
+I'm always eager to connect with individuals who share a passion for data, technology, and the broader spectrum of knowledge. Whether you're interested in discussing the latest data trends or delving into philosophical debates, I welcome the opportunity to connect. Explore my [portfolio](https://tiagovportela.github.io/), and let's embark on a journey of innovation and discovery together.
 
 Cheers,  
 Tiago
