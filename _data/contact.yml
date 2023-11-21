@@ -21,7 +21,7 @@
 #
 - type: linkedin
   icon: 'fab fa-linkedin'   # icons powered by <https://fontawesome.com/>
-  url:  'https://www.linkedin.com/in/tiago-portela-394512298?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'                  # Fill with your Linkedin homepage
+  url:  'https://www.linkedin.com/in/tiago-portela-394512298'                  # Fill with your Linkedin homepage
 #
 # - type: stack-overflow
 #   icon: 'fab fa-stack-overflow'
