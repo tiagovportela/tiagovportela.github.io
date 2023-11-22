@@ -4,9 +4,8 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-<!-- > Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-tip } -->
-
+> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
+{: .prompt-tip }
 
 Greetings! I'm Tiago, a seasoned Data Analytics Engineer with a diverse background in crafting analytical solutions and developing innovative systems. Over the past years, my professional journey has been marked by a relentless pursuit of excellence and a passion for data-driven insights.
 
