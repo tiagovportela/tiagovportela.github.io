@@ -8,4 +8,4 @@ theme = 'hugo-coder'
     description = "A minimalist blog"
     keywords = "blog,developer,personal"
     info = "Full Stack Developer"
-    avatarurl = "images/avatar.jpg" # Place an image in static/images/
+    avatarurl = "images/avatar.png" # Place an image in static/images/
