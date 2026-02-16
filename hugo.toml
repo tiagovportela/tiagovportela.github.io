@@ -9,3 +9,4 @@ theme = 'hugo-coder'
     keywords = "blog,developer,personal"
     info = "Full Stack Developer"
     avatarurl = "images/avatar.png" # Place an image in static/images/
+    customCSS = ["css/custom.css"]
