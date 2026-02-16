@@ -1,0 +1,11 @@
+baseURL = 'https://tiagovportela.github.io/<your-repo-name>/'
+languageCode = 'en-us'
+title = 'Tiago Portela Site'
+theme = 'hugo-coder'
+
+[params]
+    author = "Tiago Portela"
+    description = "A minimalist blog"
+    keywords = "blog,developer,personal"
+    info = "Full Stack Developer"
+    avatarurl = "images/avatar.jpg" # Place an image in static/images/
