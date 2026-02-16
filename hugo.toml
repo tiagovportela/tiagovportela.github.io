@@ -1,6 +1,6 @@
-baseURL = 'https://tiagovportela.github.io/tiagovportela/'
+baseURL = 'https://tiagovportela.github.io/'
 languageCode = 'en-us'
-title = 'Tiago Portela Site'
+title = 'Tiago Portela'
 theme = 'hugo-coder'
 
 [params]
