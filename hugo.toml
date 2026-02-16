@@ -1,4 +1,4 @@
-baseURL = 'https://tiagovportela.github.io/<your-repo-name>/'
+baseURL = 'https://tiagovportela.github.io/tiagovportela/'
 languageCode = 'en-us'
 title = 'Tiago Portela Site'
 theme = 'hugo-coder'
