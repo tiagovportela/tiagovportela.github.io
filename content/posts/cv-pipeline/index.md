@@ -26,15 +26,17 @@ A typical pose estimation pipeline involves several distinct stages:
 
 In the sequential design, these stages execute one after another on a single thread. The CPU is never doing more than one thing at a time. While stage 3 (landmark estimation) is running inference, stage 1 (the camera) is idle — even though it could already be reading the next frame. This is the core inefficiency: **idle time caused by serialisation**.
 
+![Sequential Pipeline](/posts/cv-pipeline/sequantial.png)
+
 ### Amdahl's Law and the Limits of Parallelism
 
 Before reaching for threads, it is worth asking: *how much can parallelism actually help?* Amdahl's Law gives us a theoretical ceiling.
 
 If a fraction `p` of the work can be parallelised and the rest `(1 - p)` must remain sequential, then the maximum speedup achievable with `N` processors is:
 
-```
-Speedup(N) = 1 / ((1 - p) + p / N)
-```
+$$
+Speedup(N) = \frac{1} {((1 - p) + p / N)}
+$$
 
 As `N → ∞`, the speedup approaches `1 / (1 - p)`. In other words, if 90% of the pipeline is parallelisable, the best possible speedup is 10×, regardless of how many cores you throw at it.
 

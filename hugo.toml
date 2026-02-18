@@ -10,6 +10,7 @@ theme = 'hugo-coder'
     info = "Full Stack Developer"
     avatarurl = "images/avatar.png" # Place an image in static/images/
     customCSS = ["css/custom.css"]
+    math = true
 
 [taxonomies]
   category = "categories"
@@ -19,3 +20,8 @@ theme = 'hugo-coder'
   name = "Blog"
   weight = 1
   url = "posts/"
+
+[markup]
+[markup.goldmark]
+  [markup.goldmark.renderer]
+    unsafe = true
