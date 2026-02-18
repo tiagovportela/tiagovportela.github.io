@@ -6,12 +6,12 @@
     <description>Recent content in Optimization on Tiago Portela</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 18 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 21 Jul 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/optimization/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Optimizing Mobile Computer Vision</title>
       <link>http://localhost:1313/posts/cv-pipeline/</link>
-      <pubDate>Wed, 18 Feb 2026 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 21 Jul 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/cv-pipeline/</guid>
       <description>&lt;h1 id=&#34;from-sequential-to-concurrent-how-a-pipeline-redesign-doubled-throughput-in-a-mobile-pose-estimation-system&#34;&gt;&#xA;  From Sequential to Concurrent: How a Pipeline Redesign Doubled Throughput in a Mobile Pose Estimation System&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#from-sequential-to-concurrent-how-a-pipeline-redesign-doubled-throughput-in-a-mobile-pose-estimation-system&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Mobile computer vision is brutal on resources. Every millisecond counts, every CPU cycle is contested, and the gap between a smooth real-time experience and a stuttering one is often just a matter of &lt;em&gt;how&lt;/em&gt; you sequence your work — not &lt;em&gt;how much&lt;/em&gt; work you do.&lt;/p&gt;&#xA;&lt;p&gt;This post documents an investigation into improving the frame rate of a pose estimation pipeline running on a smartphone. The original design was sequential: one frame, one thread, one stage at a time. The new design is pipelined: stages run concurrently on dedicated threads, connected by conflated queues. The results reveal a clear throughput–latency trade-off that is worth understanding carefully before choosing one approach over the other.&lt;/p&gt;</description>
     </item>

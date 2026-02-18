@@ -12,6 +12,18 @@ theme = 'hugo-coder'
     customCSS = ["css/custom.css"]
     math = true
 
+[[params.social]]
+  name = "Github"
+  icon = "fa fa-2x fa-github"
+  weight = 1
+  url = "https://github.com/tiagovportela/"
+
+[[params.social]]
+  name = "LinkedIn"
+  icon = "fa fa-2x fa-linkedin"
+  weight = 2
+  url = "https://www.linkedin.com/in/tiagovportela/"
+
 [taxonomies]
   category = "categories"
   tag = "tags"
