@@ -216,7 +216,8 @@
 <li><strong>Visualisation</strong> — draw the skeleton overlay and write the output frame</li>
 </ol>
 <p>In the sequential design, these stages execute one after another on a single thread. The CPU is never doing more than one thing at a time. While stage 3 (landmark estimation) is running inference, stage 1 (the camera) is idle — even though it could already be reading the next frame. This is the core inefficiency: <strong>idle time caused by serialisation</strong>.</p>
-<p><img src="/posts/cv-pipeline/sequantial.png" alt="Sequential Pipeline"></p>
+<p><img src="/posts/cv-pipeline/sequenctial-pipeline.png" alt="Sequential Pipeline">
+<img src="/posts/cv-pipeline/sequantial.png" alt="Sequential Pipeline threads"></p>
 <h3 id="amdahls-law-and-the-limits-of-parallelism">
   Amdahl&rsquo;s Law and the Limits of Parallelism
   <a class="heading-link" href="#amdahls-law-and-the-limits-of-parallelism">
@@ -260,32 +261,9 @@ $$</p>
   </a>
 </h3>
 <p>The new system decomposes the pipeline into four dedicated threads connected by bounded, conflated queues.</p>
-<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart LR
-    subgraph Thread1[&#34;Thread 1: Frame Producer&#34;]
-        CAM[CameraSource\nread frame]
-    end
-
-    subgraph Thread2[&#34;Thread 2: Bounding Box Consumer&#34;]
-        DET[PoseDetector\nbounding box inference]
-    end
-
-    subgraph Thread3[&#34;Thread 3: Landmarks Producer&#34;]
-        TRK[PoseTracker\nlandmark inference]
-    end
-
-    subgraph Thread4[&#34;Thread 4: Landmarks Consumer&#34;]
-        VIS[PoseVisualizer\ndraw + save + metrics]
-    end
-
-    CAM --&gt;|FrameDataQueue\ncapacity=2| DET
-    DET --&gt;|FrameDataQueue\ncapacity=2| TRK
-    TRK --&gt;|FrameDataQueue\ncapacity=2| VIS
-
-    style Thread1 fill:#dbeafe,stroke:#3b82f6
-    style Thread2 fill:#dcfce7,stroke:#22c55e
-    style Thread3 fill:#fef9c3,stroke:#eab308
-    style Thread4 fill:#fce7f3,stroke:#ec4899
-</code></pre><p>Each queue has a capacity of 2. This is intentional: it limits buffering (and therefore latency growth) while still decoupling adjacent stages enough to absorb minor jitter.</p>
+<p><img src="/posts/cv-pipeline/multithread-pipeline.png" alt="Pipeline threads">
+<img src="/posts/cv-pipeline/multithread.png" alt="Pipeline threads"></p>
+<p>Each queue has a capacity of 2. This is intentional: it limits buffering (and therefore latency growth) while still decoupling adjacent stages enough to absorb minor jitter.</p>
 <h3 id="the-conflated-queue-freshness-over-completeness">
   The Conflated Queue: Freshness over Completeness
   <a class="heading-link" href="#the-conflated-queue-freshness-over-completeness">
@@ -309,29 +287,8 @@ $$</p>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">sequenceDiagram
-    participant FP as FrameProducer (T1)
-    participant BQ as frameQueue
-    participant BB as BoundingBoxConsumer (T2)
-    participant BBQ as boundingBoxQueue
-    participant LP as LandmarksProducer (T3)
-    participant LQ as landmarksQueue
-    participant LC as LandmarksConsumer (T4)
-
-    loop for each frame
-        FP-&gt;&gt;BQ: put(frame)
-        BQ-&gt;&gt;BB: take() → detect()
-        BB-&gt;&gt;BBQ: put(frameWithBox)
-        BBQ-&gt;&gt;LP: take() → track()
-        LP-&gt;&gt;LQ: put(frameWithLandmarks)
-        LQ-&gt;&gt;LC: take() → visualize()
-    end
-
-    FP-&gt;&gt;BQ: put(POISON_PILL)
-    BB-&gt;&gt;BBQ: put(POISON_PILL)
-    LP-&gt;&gt;LQ: put(POISON_PILL)
-    LC--&gt;&gt;LC: exit
-</code></pre><p>The <code>ExecutorService</code> with a fixed thread pool of four threads manages lifecycle. After submitting all tasks, <code>shutdown()</code> followed by <code>awaitTermination()</code> ensures the main thread waits for the pipeline to drain completely.</p>
+<p><img src="/posts/cv-pipeline/lifecycle.png" alt="Thread lifecycle"></p>
+<p>The <code>ExecutorService</code> with a fixed thread pool of four threads manages lifecycle. After submitting all tasks, <code>shutdown()</code> followed by <code>awaitTermination()</code> ensures the main thread waits for the pipeline to drain completely.</p>
 <hr>
 <h2 id="comparison-sequential-vs-concurrent">
   Comparison: Sequential vs. Concurrent
@@ -347,22 +304,8 @@ $$</p>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">flowchart TD
-    subgraph sequential[&#34;Sequential (Single-Thread)&#34;]
-        direction TB
-        S1[Read Frame] --&gt; S2[Detect Person\nBounding Box]
-        S2 --&gt; S3[Estimate Landmarks]
-        S3 --&gt; S4[Visualise &amp; Save]
-        S4 --&gt; S1
-    end
-
-    subgraph concurrent[&#34;Concurrent (Multi-Thread)&#34;]
-        direction TB
-        T1[Thread 1\nRead Frame] --&gt;|queue| T2[Thread 2\nDetect Person]
-        T2 --&gt;|queue| T3[Thread 3\nEstimate Landmarks]
-        T3 --&gt;|queue| T4[Thread 4\nVisualise &amp; Save]
-    end
-</code></pre><p>The key conceptual difference is that in the sequential design, time advances <em>vertically</em> — each stage must complete before the next begins. In the concurrent design, time advances <em>horizontally</em> — at any given moment, all four threads are doing useful work on different frames.</p>
+<p><img src="/posts/cv-pipeline/design-comparation.png" alt="Design comparison"></p>
+<p>The key conceptual difference is that in the sequential design, time advances <em>vertically</em> — each stage must complete before the next begins. In the concurrent design, time advances <em>horizontally</em> — at any given moment, all four threads are doing useful work on different frames.</p>
 <h3 id="performance-results">
   Performance Results
   <a class="heading-link" href="#performance-results">
@@ -370,6 +313,7 @@ $$</p>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p><img src="/posts/cv-pipeline/plot_comparation.png" alt="Performance results"></p>
 <p>Both systems were benchmarked on the same 500-frame sequence. The multi-threaded pipeline used the conflated queue, simulating a 30 FPS camera source.</p>
 <h4 id="throughput-inter-frame-completion-interval">
   Throughput (inter-frame completion interval)
@@ -561,6 +505,15 @@ $$</p>
 <p>A relatively modest architectural change — wrapping four sequential stages in dedicated threads connected by conflated queues — more than doubled the sustained frame rate of the pose estimation pipeline from 5.2 to 11.0 FPS. This required no changes to the inference models, no hardware upgrades, and no data parallelism.</p>
 <p>The cost is real: latency increased by 40%, and the conflated queue discards roughly two-thirds of incoming frames under a 30 FPS camera load. For a smartphone application displaying live skeleton overlays, the throughput gain outweighs both costs — the user sees smoother output, and the system always reacts to the <em>current</em> frame rather than one that arrived several hundred milliseconds ago.</p>
 <p>The deeper lesson is architectural: <strong>concurrency is not free, but neither is serialisation.</strong> Understanding exactly where your pipeline spends its time — and which stages can overlap — is the prerequisite for any meaningful performance improvement.</p>
+<h2 id="notes">
+  Notes
+  <a class="heading-link" href="#notes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>One simplification in this study is that we run the full person detector on every processed frame. In a real-world deployment, this is rarely necessary.</p>
+<p>Adjacent video frames are highly correlated. A more efficient approach would be to run the expensive detector only initially (or periodically) to find the subject, and then use a lightweight tracker (like optical flow or a Kalman filter) to follow the bounding box in subsequent frames. Re-running the detector would only be triggered if tracking fails or at a fixed low frequency (e.g. 1 Hz). This &ldquo;detect-and-track&rdquo; strategy could theoretically double or triple the effective frame rate by skipping the heavy detection inference step for the majority of frames.</p>
 
       </div>
 

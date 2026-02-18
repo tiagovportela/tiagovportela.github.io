@@ -26,7 +26,9 @@ A typical pose estimation pipeline involves several distinct stages:
 
 In the sequential design, these stages execute one after another on a single thread. The CPU is never doing more than one thing at a time. While stage 3 (landmark estimation) is running inference, stage 1 (the camera) is idle — even though it could already be reading the next frame. This is the core inefficiency: **idle time caused by serialisation**.
 
-![Sequential Pipeline](/posts/cv-pipeline/sequantial.png)
+
+![Sequential Pipeline](/posts/cv-pipeline/sequenctial-pipeline.png)
+![Sequential Pipeline threads](/posts/cv-pipeline/sequantial.png)
 
 ### Amdahl's Law and the Limits of Parallelism
 
@@ -59,33 +61,8 @@ We chose **pipeline parallelism** because the TFLite models are expensive to dup
 
 The new system decomposes the pipeline into four dedicated threads connected by bounded, conflated queues.
 
-```mermaid
-flowchart LR
-    subgraph Thread1["Thread 1: Frame Producer"]
-        CAM[CameraSource\nread frame]
-    end
-
-    subgraph Thread2["Thread 2: Bounding Box Consumer"]
-        DET[PoseDetector\nbounding box inference]
-    end
-
-    subgraph Thread3["Thread 3: Landmarks Producer"]
-        TRK[PoseTracker\nlandmark inference]
-    end
-
-    subgraph Thread4["Thread 4: Landmarks Consumer"]
-        VIS[PoseVisualizer\ndraw + save + metrics]
-    end
-
-    CAM -->|FrameDataQueue\ncapacity=2| DET
-    DET -->|FrameDataQueue\ncapacity=2| TRK
-    TRK -->|FrameDataQueue\ncapacity=2| VIS
-
-    style Thread1 fill:#dbeafe,stroke:#3b82f6
-    style Thread2 fill:#dcfce7,stroke:#22c55e
-    style Thread3 fill:#fef9c3,stroke:#eab308
-    style Thread4 fill:#fce7f3,stroke:#ec4899
-```
+![Pipeline threads](/posts/cv-pipeline/multithread-pipeline.png)
+![Pipeline threads](/posts/cv-pipeline/multithread.png)
 
 Each queue has a capacity of 2. This is intentional: it limits buffering (and therefore latency growth) while still decoupling adjacent stages enough to absorb minor jitter.
 
@@ -108,30 +85,7 @@ The poison-pill pattern propagates shutdown: when the camera source is exhausted
 
 ### Thread Lifecycle and Shutdown
 
-```mermaid
-sequenceDiagram
-    participant FP as FrameProducer (T1)
-    participant BQ as frameQueue
-    participant BB as BoundingBoxConsumer (T2)
-    participant BBQ as boundingBoxQueue
-    participant LP as LandmarksProducer (T3)
-    participant LQ as landmarksQueue
-    participant LC as LandmarksConsumer (T4)
-
-    loop for each frame
-        FP->>BQ: put(frame)
-        BQ->>BB: take() → detect()
-        BB->>BBQ: put(frameWithBox)
-        BBQ->>LP: take() → track()
-        LP->>LQ: put(frameWithLandmarks)
-        LQ->>LC: take() → visualize()
-    end
-
-    FP->>BQ: put(POISON_PILL)
-    BB->>BBQ: put(POISON_PILL)
-    LP->>LQ: put(POISON_PILL)
-    LC-->>LC: exit
-```
+![Thread lifecycle](/posts/cv-pipeline/lifecycle.png)
 
 The `ExecutorService` with a fixed thread pool of four threads manages lifecycle. After submitting all tasks, `shutdown()` followed by `awaitTermination()` ensures the main thread waits for the pipeline to drain completely.
 
@@ -141,27 +95,13 @@ The `ExecutorService` with a fixed thread pool of four threads manages lifecycle
 
 ### Side-by-Side Architecture
 
-```mermaid
-flowchart TD
-    subgraph sequential["Sequential (Single-Thread)"]
-        direction TB
-        S1[Read Frame] --> S2[Detect Person\nBounding Box]
-        S2 --> S3[Estimate Landmarks]
-        S3 --> S4[Visualise & Save]
-        S4 --> S1
-    end
-
-    subgraph concurrent["Concurrent (Multi-Thread)"]
-        direction TB
-        T1[Thread 1\nRead Frame] -->|queue| T2[Thread 2\nDetect Person]
-        T2 -->|queue| T3[Thread 3\nEstimate Landmarks]
-        T3 -->|queue| T4[Thread 4\nVisualise & Save]
-    end
-```
+![Design comparison](/posts/cv-pipeline/design-comparation.png)
 
 The key conceptual difference is that in the sequential design, time advances *vertically* — each stage must complete before the next begins. In the concurrent design, time advances *horizontally* — at any given moment, all four threads are doing useful work on different frames.
 
 ### Performance Results
+
+![Performance results](/posts/cv-pipeline/plot_comparation.png)
 
 Both systems were benchmarked on the same 500-frame sequence. The multi-threaded pipeline used the conflated queue, simulating a 30 FPS camera source.
 
@@ -225,6 +165,7 @@ Pipeline parallelism improves throughput at the cost of latency. This is always 
 
 ---
 
+
 ## Conclusion
 
 A relatively modest architectural change — wrapping four sequential stages in dedicated threads connected by conflated queues — more than doubled the sustained frame rate of the pose estimation pipeline from 5.2 to 11.0 FPS. This required no changes to the inference models, no hardware upgrades, and no data parallelism.
@@ -232,3 +173,9 @@ A relatively modest architectural change — wrapping four sequential stages in 
 The cost is real: latency increased by 40%, and the conflated queue discards roughly two-thirds of incoming frames under a 30 FPS camera load. For a smartphone application displaying live skeleton overlays, the throughput gain outweighs both costs — the user sees smoother output, and the system always reacts to the *current* frame rather than one that arrived several hundred milliseconds ago.
 
 The deeper lesson is architectural: **concurrency is not free, but neither is serialisation.** Understanding exactly where your pipeline spends its time — and which stages can overlap — is the prerequisite for any meaningful performance improvement.
+
+## Notes
+
+One simplification in this study is that we run the full person detector on every processed frame. In a real-world deployment, this is rarely necessary.
+
+Adjacent video frames are highly correlated. A more efficient approach would be to run the expensive detector only initially (or periodically) to find the subject, and then use a lightweight tracker (like optical flow or a Kalman filter) to follow the bounding box in subsequent frames. Re-running the detector would only be triggered if tracking fails or at a fixed low frequency (e.g. 1 Hz). This "detect-and-track" strategy could theoretically double or triple the effective frame rate by skipping the heavy detection inference step for the majority of frames.
