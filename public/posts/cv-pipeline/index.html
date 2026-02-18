@@ -200,6 +200,7 @@
 </h1>
 <p>Mobile computer vision is brutal on resources. Every millisecond counts, every CPU cycle is contested, and the gap between a smooth real-time experience and a stuttering one is often just a matter of <em>how</em> you sequence your work — not <em>how much</em> work you do.</p>
 <p>This post documents an investigation into improving the frame rate of a pose estimation pipeline running on a smartphone. The original design was sequential: one frame, one thread, one stage at a time. The new design is pipelined: stages run concurrently on dedicated threads, connected by conflated queues. The results reveal a clear throughput–latency trade-off that is worth understanding carefully before choosing one approach over the other.</p>
+<p>The full source code and benchmark scripts are available on GitHub: <a href="https://github.com/tiagovportela/ConcurrentPoseInference"  class="external-link" target="_blank" rel="noopener">ConcurrentPoseInference</a>.</p>
 <hr>
 <h2 id="the-problem-sequential-bottlenecks-in-a-multi-stage-pipeline">
   The Problem: Sequential Bottlenecks in a Multi-Stage Pipeline

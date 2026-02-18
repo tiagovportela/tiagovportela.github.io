@@ -13,6 +13,8 @@ Mobile computer vision is brutal on resources. Every millisecond counts, every C
 
 This post documents an investigation into improving the frame rate of a pose estimation pipeline running on a smartphone. The original design was sequential: one frame, one thread, one stage at a time. The new design is pipelined: stages run concurrently on dedicated threads, connected by conflated queues. The results reveal a clear throughput–latency trade-off that is worth understanding carefully before choosing one approach over the other.
 
+The full source code and benchmark scripts are available on GitHub: [ConcurrentPoseInference](https://github.com/tiagovportela/ConcurrentPoseInference).
+
 ---
 
 ## The Problem: Sequential Bottlenecks in a Multi-Stage Pipeline
