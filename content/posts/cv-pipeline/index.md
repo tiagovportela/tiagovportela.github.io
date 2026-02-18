@@ -1,6 +1,6 @@
 +++ 
 title = "Optimizing Mobile Computer Vision"
-date = "2026-02-18"
+date = "2025-07-21"
 draft = false
 description = "How I optimized a real-time pose estimation pipeline."
 tags = ["computer-vision", "mobile", "optimization", "parallel-computing", "multithreading", "producer-consumer"]
