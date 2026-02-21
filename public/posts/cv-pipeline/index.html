@@ -152,7 +152,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              8-minute read
+              11-minute read
             </span>
           </div>
           
@@ -217,8 +217,69 @@
 <li><strong>Visualisation</strong> — draw the skeleton overlay and write the output frame</li>
 </ol>
 <p>In the sequential design, these stages execute one after another on a single thread. The CPU is never doing more than one thing at a time. While stage 3 (landmark estimation) is running inference, stage 1 (the camera) is idle — even though it could already be reading the next frame. This is the core inefficiency: <strong>idle time caused by serialisation</strong>.</p>
-<p><img src="/posts/cv-pipeline/sequenctial-pipeline.png" alt="Sequential Pipeline">
-<img src="/posts/cv-pipeline/sequantial.png" alt="Sequential Pipeline threads"></p>
+<div class="mermaid">
+graph LR
+    %% Direction and Theme
+    direction LR
+
+    %% Subgraphs for logical grouping
+    subgraph Input_Stage [Data Acquisition]
+        A[/"fa:fa-camera-retro Camera Source"/]
+    end
+
+    subgraph Core_Processing [AI Pipeline]
+        B("Frame Preprocessor")
+        C("Pose Detector")
+        D("Pose Tracker")
+    end
+
+    subgraph Output_Stage [Result]
+        E("Visualizer")
+    end
+
+    %% Connection Logic with enhanced labels
+    A ==>|Raw Frame| B
+    B -->|Input Tensor| C
+    C -->|Bounding Box| D
+    D ==>|Landmarks| E
+
+    %% Professional Styling
+    style A fill:#FFB3FF,stroke:#D400D4,stroke-width:2px,color:#333
+    style B fill:#f9f9f9,stroke:#333,stroke-width:2px
+    style C fill:#f9f9f9,stroke:#333,stroke-width:2px
+    style D fill:#f9f9f9,stroke:#333,stroke-width:2px
+    style E fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+
+    %% Subgraph Styling
+    style Input_Stage fill:none,stroke:#ccc,stroke-dasharray: 5 5
+    style Core_Processing fill:#fcfcfc,stroke:#ccc,stroke-dasharray: 5 5
+    style Output_Stage fill:none,stroke:#ccc,stroke-dasharray: 5 5
+
+</div>
+
+<div class="mermaid">
+gantt
+    title Single Thread Utilization (Synchronous Processing)
+    dateFormat  YYYY-MM-DD
+    axisFormat  %M:%S
+    
+    section Core 1 (t1)
+    Frame 1         :active, f1, 2024-01-01, 1d
+    Detection 1     :active, d1, after f1, 1d
+    Landmarks 1     :active, l1, after d1, 1d
+    Visualization 1 :active, v1, after l1, 1d
+
+    section Core 2 (t2)
+    idle            :crit, 2024-01-01, 4d
+
+    section Core 3 (t3)
+    idle            :crit, 2024-01-01, 4d
+
+    section Core 4 (t4)
+    idle            :crit, 2024-01-01, 4d
+
+</div>
+
 <h3 id="amdahls-law-and-the-limits-of-parallelism">
   Amdahl&rsquo;s Law and the Limits of Parallelism
   <a class="heading-link" href="#amdahls-law-and-the-limits-of-parallelism">
@@ -261,9 +322,91 @@ $$</p>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The new system decomposes the pipeline into four dedicated threads connected by bounded, conflated queues.</p>
-<p><img src="/posts/cv-pipeline/multithread-pipeline.png" alt="Pipeline threads">
-<img src="/posts/cv-pipeline/multithread.png" alt="Pipeline threads"></p>
+<p>The new system decomposes the pipeline into four dedicated threads connected by bounded, conflated queues.
+<div class="mermaid">
+%%{init: {'theme': 'base', 'themeVariables': { 'fontFamily': 'Helvetica, Arial, sans-serif', 'fontSize': '14px', 'lineColor': '#5e6c84'}}}%%
+flowchart LR
+    %% Define Professional Minimalist Styles
+    classDef process fill:#ffffff,stroke:#5e6c84,stroke-width:1px,color:#172b4d;
+    classDef queue fill:#f4f5f7,stroke:#8993a4,stroke-width:2px,stroke-dasharray: 4 4,color:#172b4d;
+    classDef thread fill:#fbfbfc,stroke:#dfe1e6,stroke-width:2px,color:#5e6c84;
+
+    subgraph T1 ["Thread 1: Frame Producer"]
+        N1["<strong>CameraSource</strong><br/>read frame"]:::process
+    end
+    
+    %% Changed to stadium shape (horizontal pill)
+    Q1(["FrameQueue<br/>(cap=2)"]):::queue
+    
+    subgraph T2 ["Thread 2: Bounding Box"]
+        N2["<strong>PoseDetector</strong><br/>bounding box<br/>inference"]:::process
+    end
+    
+    %% Changed to stadium shape (horizontal pill)
+    Q2(["BoundingBoxQueue<br/>(cap=2)"]):::queue
+    
+    subgraph T3 ["Thread 3: Landmarks Producer"]
+        N3["<strong>PoseTracker</strong><br/>landmark<br/>inference"]:::process
+    end
+    
+    %% Changed to stadium shape (horizontal pill)
+    Q3(["LandmarksQueue<br/>(cap=2)"]):::queue
+    
+    subgraph T4 ["Thread 4: Landmarks Visualizer"]
+        N4["<strong>PoseVisualizer</strong><br/>draw + save<br/>+ metrics"]:::process
+    end
+
+    %% Standardized Flow Connections
+    N1 --> Q1
+    Q1 --> N2
+    N2 --> Q2
+    Q2 --> N3
+    N3 --> Q3
+    Q3 --> N4
+
+    %% Apply Subgraph Styles
+    class T1,T2,T3,T4 thread
+
+</div>
+</p>
+<div class="mermaid">
+gantt
+    title Pipelined Execution (Multithreaded)
+    dateFormat  YYYY-MM-DD
+    axisFormat  %M:%S
+    
+    section Thread 1 (t1)
+    Frame 1            :active, f1, 2024-01-01, 1d
+    Frame 2            :active, f2, 2024-01-02, 1d
+    Frame 3            :active, f3, 2024-01-03, 1d
+    Intermediate...    :done,   f_gap, 2024-01-04, 3d
+    Frame n            :active, fn, 2024-01-07, 1d
+
+    section Thread 2 (t2)
+    idle               :crit, i2, 2024-01-01, 1d
+    Detection 1        :active, d1, 2024-01-02, 1d
+    Detection 2        :active, d2, 2024-01-03, 1d
+    Detection 3        :active, d3, 2024-01-04, 1d
+    Intermediate...    :done,   d_gap, 2024-01-05, 2d
+    Detection n        :active, dn, 2024-01-07, 1d
+
+    section Thread 3 (t3)
+    idle               :crit, i3, 2024-01-01, 2d
+    Landmark 1         :active, l1, 2024-01-03, 1d
+    Landmark 2         :active, l2, 2024-01-04, 1d
+    Landmark 3         :active, l3, 2024-01-05, 1d
+    Intermediate...    :done,   l_gap, 2024-01-06, 1d
+    Landmark n         :active, ln, 2024-01-07, 1d
+
+    section Thread 4 (t4)
+    idle               :crit, i4, 2024-01-01, 3d
+    Visualization 1    :active, v1, 2024-01-04, 1d
+    Visualization 2    :active, v2, 2024-01-05, 1d
+    Intermediate...    :done,   l_gap, 2024-01-06, 1d
+    Visualization n    :active, vn, 2024-01-07, 1d
+
+</div>
+
 <p>Each queue has a capacity of 2. This is intentional: it limits buffering (and therefore latency growth) while still decoupling adjacent stages enough to absorb minor jitter.</p>
 <h3 id="the-conflated-queue-freshness-over-completeness">
   The Conflated Queue: Freshness over Completeness
@@ -288,7 +431,47 @@ $$</p>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p><img src="/posts/cv-pipeline/lifecycle.png" alt="Thread lifecycle"></p>
+<div class="mermaid">
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'fontFamily': 'Helvetica, Arial, sans-serif',
+    'fontSize': '14px',
+    'actorBkg': '#e3f2fd',
+    'actorBorder': '#1565c0',
+    'actorTextColor': '#000000',
+    'signalColor': '#000000',
+    'signalTextColor': '#000000',
+    'loopBkg': '#fff8e1',
+    'loopTextColor': '#000000'
+  }
+}}%%
+sequenceDiagram
+    participant T1 as FrameProducer (T1)
+    participant Q1 as frameQueue
+    participant T2 as BoundingBoxConsumer (T2)
+    participant Q2 as boundingBoxQueue
+    participant T3 as LandmarksProducer (T3)
+    participant Q3 as landmarksQueue
+    participant T4 as LandmarksConsumer (T4)
+
+    loop for each frame
+        T1->>Q1: put(frame)
+        Q1->>T2: take() → detect()
+        T2->>Q2: put(frameWithBox)
+        Q2->>T3: take() → track()
+        T3->>Q3: put(frameWithLandmarks)
+        Q3->>T4: take() → visualize()
+    end
+
+    T1->>Q1: put(POISON_PILL)
+    T2->>Q2: put(POISON_PILL)
+    T3->>Q3: put(POISON_PILL)
+    
+    T4-->>T4: exit
+
+</div>
+
 <p>The <code>ExecutorService</code> with a fixed thread pool of four threads manages lifecycle. After submitting all tasks, <code>shutdown()</code> followed by <code>awaitTermination()</code> ensures the main thread waits for the pipeline to drain completely.</p>
 <hr>
 <h2 id="comparison-sequential-vs-concurrent">
@@ -305,7 +488,48 @@ $$</p>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p><img src="/posts/cv-pipeline/design-comparation.png" alt="Design comparison"></p>
+<div class="mermaid">
+flowchart TB
+    subgraph CONCURRENT["Concurrent — Multi-Thread"]
+        direction TB
+        T1["Thread 1\nRead Frame"]
+        T2["Thread 2\nDetect Person"]
+        T3["Thread 3\nEstimate Landmarks"]
+        T4["Thread 4\nVisualise & Save"]
+
+        T1 -- "queue A" --> T2
+        T2 -- "queue B" --> T3
+        T3 -- "queue C" --> T4
+    end
+
+    subgraph SEQUENTIAL["Sequential — Single-Thread"]
+        direction TB
+        S1["Read Frame"]
+        S2["Detect Person Bounding Box"]
+        S3["Estimate Landmarks"]
+        S4["Visualise & Save"]
+
+        S1 --> S2
+        S2 --> S3
+        S3 --> S4
+        S4 -- "next frame" --> S1
+    end
+
+    style CONCURRENT fill:#d0e8f8,stroke:#2d6aad,color:#0a2a4a
+    style SEQUENTIAL fill:#d0e8f8,stroke:#2d6aad,color:#0a2a4a
+
+    style T1 fill:#1e5799,stroke:#4a9ede,color:#ffffff
+    style T2 fill:#1e5799,stroke:#4a9ede,color:#ffffff
+    style T3 fill:#1e5799,stroke:#4a9ede,color:#ffffff
+    style T4 fill:#1e5799,stroke:#4a9ede,color:#ffffff
+
+    style S1 fill:#155a8a,stroke:#4a9ede,color:#ffffff
+    style S2 fill:#155a8a,stroke:#4a9ede,color:#ffffff
+    style S3 fill:#155a8a,stroke:#4a9ede,color:#ffffff
+    style S4 fill:#155a8a,stroke:#4a9ede,color:#ffffff
+
+</div>
+
 <p>The key conceptual difference is that in the sequential design, time advances <em>vertically</em> — each stage must complete before the next begins. In the concurrent design, time advances <em>horizontally</em> — at any given moment, all four threads are doing useful work on different frames.</p>
 <h3 id="performance-results">
   Performance Results
@@ -428,27 +652,7 @@ $$</p>
   </a>
 </h4>
 <p>The most striking difference is <strong>frame coverage</strong>:</p>
-<table>
-  <thead>
-      <tr>
-          <th></th>
-          <th>Frames Processed</th>
-          <th>Frames Dropped</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Single-Thread</td>
-          <td>499 / 500 (100%)</td>
-          <td>0 (0%)</td>
-      </tr>
-      <tr>
-          <td>Multi-Thread</td>
-          <td>180 / 500 (36%)</td>
-          <td>320 (64%)</td>
-      </tr>
-  </tbody>
-</table>
+<p><img src="/posts/cv-pipeline/frame_drop.png" alt="Frame coverage"></p>
 <p>The conflated queue dropped 64% of frames. From a raw completeness perspective this looks alarming, but in the context of a <em>real-time</em> application it is the intended behaviour: the system prioritised processing the most recent frames rather than accumulating a backlog. At 30 FPS input and ~11 FPS processing capacity, dropping is mathematically inevitable — the camera produces frames roughly 2.7× faster than the pipeline can consume them.</p>
 <hr>
 <h2 id="interpreting-the-trade-off">
@@ -569,6 +773,12 @@ $$</p>
 
   </main>
 
+  
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@9.3.0/dist/mermaid.min.js"
+    integrity="sha256-QdTG1YTLLTwD3b95jLqFxpQX9uYuJMNAtVZgwKX4oYU=" crossorigin="anonymous"></script>
+  <script>
+    mermaid.initialize({ startOnLoad: true });
+  </script>
   
 
   

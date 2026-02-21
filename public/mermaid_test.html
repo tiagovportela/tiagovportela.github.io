@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mermaid 9.3.0 Test</title>
+</head>
+<body>
+  <div class="mermaid">
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#e3f2fd',
+    'primaryTextColor': '#0d47a1',
+    'primaryBorderColor': '#1565c0',
+    'lineColor': '#1565c0',
+    'secondaryColor': '#e3f2fd',
+    'tertiaryColor': '#e3f2fd',
+    'clusterBkg': '#f0f7ff',
+    'clusterBorder': '#90caf9',
+    'fontSize': '14px'
+  }
+}}%%
+flowchart TD
+    subgraph Concurrent ["Concurrent (Multi-Thread)"]
+        direction TB
+        C1["<div style='width:160px;'>Thread 1<br/>Read Frame</div>"]
+        C2["<div style='width:160px;'>Thread 2<br/>Detect Person</div>"]
+        C3["<div style='width:160px;'>Thread 3<br/>Estimate Landmarks</div>"]
+        C4["<div style='width:160px;'>Thread 4<br/>Visualise & Save</div>"]
+        C1 -- "queue A" --> C2
+        C2 -- "queue B" --> C3
+        C3 -- "queue C" --> C4
+    end
+    subgraph Sequential ["Sequential (Single-Thread)"]
+        direction TB
+        S1["<div style='width:160px;'>Step 1<br/>Read Frame</div>"]
+        S2["<div style='width:160px;'>Step 2<br/>Detect Person</div>"]
+        S3["<div style='width:160px;'>Step 3<br/>Estimate Landmarks</div>"]
+        S4["<div style='width:160px;'>Step 4<br/>Visualise & Save</div>"]
+        S1 -- "next" --> S2
+        S2 -- "next" --> S3
+        S3 -- "next" --> S4
+        S4 -.-> S1
+    end
+    classDef blueStyle fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#0d47a1;
+    class C1,C2,C3,C4,S1,S2,S3,S4 blueStyle;
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@9.3.0/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true });</script>
+</body>
+</html>
