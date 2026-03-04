@@ -1,6 +1,6 @@
 +++ 
 draft = false
-date = 2026-03-02T15:59:50Z
+date = 2025-12-28T15:59:50Z
 title = "Why I Built My Own 'Second Brain' Just for the Fun of It"
 description = ""
 slug = ""
