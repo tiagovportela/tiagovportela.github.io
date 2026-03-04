@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+   · Tiago Portela
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Tiago Portela">
+<meta name="description" content="
+  Why I Built My Own &ldquo;Second Brain&rdquo; Just for the Fun of It
+  
+    
+    Link to heading
+  
+
+Let’s be honest: the world didn’t need another note-taking app. Between Notion, Obsidian, and the graveyard of productivity tools on my hard drive, I was &ldquo;covered.&rdquo; But I had a problem.
+For years, I bounced between every note-taking app on the market. But they all felt like digital filing cabinets, great for accumulating links, and &ldquo;shower ideias&rdquo;, but terrible for actually thinking. I didn&rsquo;t want a place to just dump my ideias/research. I wanted a brainstorming partner. I wanted a tool that could help me explore ideas, design better systems, and connect dots I couldn&rsquo;t see.">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Tiago Portela">
+  <meta name="twitter:description" content="Why I Built My Own “Second Brain” Just for the Fun of It Link to heading Let’s be honest: the world didn’t need another note-taking app. Between Notion, Obsidian, and the graveyard of productivity tools on my hard drive, I was “covered.” But I had a problem.
+For years, I bounced between every note-taking app on the market. But they all felt like digital filing cabinets, great for accumulating links, and “shower ideias”, but terrible for actually thinking. I didn’t want a place to just dump my ideias/research. I wanted a brainstorming partner. I wanted a tool that could help me explore ideas, design better systems, and connect dots I couldn’t see.">
+
+<meta property="og:url" content="http://localhost:1313/posts/confucius-app/">
+  <meta property="og:site_name" content="Tiago Portela">
+  <meta property="og:title" content="Tiago Portela">
+  <meta property="og:description" content="Why I Built My Own “Second Brain” Just for the Fun of It Link to heading Let’s be honest: the world didn’t need another note-taking app. Between Notion, Obsidian, and the graveyard of productivity tools on my hard drive, I was “covered.” But I had a problem.
+For years, I bounced between every note-taking app on the market. But they all felt like digital filing cabinets, great for accumulating links, and “shower ideias”, but terrible for actually thinking. I didn’t want a place to just dump my ideias/research. I wanted a brainstorming partner. I wanted a tool that could help me explore ideas, design better systems, and connect dots I couldn’t see.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-03-02T15:59:50+00:00">
+    <meta property="article:modified_time" content="2026-03-02T15:59:50+00:00">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/confucius-app/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+
+
+ 
+  
+    
+    <link rel="stylesheet" href="/css/custom.css" media="screen">
+  
+
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+<body class="preload-transitions colorscheme-light">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Tiago Portela
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/confucius-app/">
+              
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2026-03-02T15:59:50Z">
+                March 2, 2026
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              5-minute read
+            </span>
+          </div>
+          
+          
+          
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h1 id="why-i-built-my-own-second-brain-just-for-the-fun-of-it">
+  Why I Built My Own &ldquo;Second Brain&rdquo; Just for the Fun of It
+  <a class="heading-link" href="#why-i-built-my-own-second-brain-just-for-the-fun-of-it">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>Let’s be honest: the world didn’t need another note-taking app. Between Notion, Obsidian, and the graveyard of productivity tools on my hard drive, I was &ldquo;covered.&rdquo; But I had a problem.</p>
+<p>For years, I bounced between every note-taking app on the market. But they all felt like digital filing cabinets, great for accumulating links, and &ldquo;shower ideias&rdquo;, but terrible for actually <em>thinking</em>. I didn&rsquo;t want a place to just dump my ideias/research. I wanted a brainstorming partner. I wanted a tool that could help me explore ideas, design better systems, and connect dots I couldn&rsquo;t see.</p>
+<p>So, instead of waiting for the perfect app to drop, I spent my weekends building a personal AI dashboard from scratch.</p>
+<p>So, I built Confucius. It’s a native desktop dashboard that doesn’t just &ldquo;chat&rdquo;, it lives inside my projects. I built my own &ldquo;Soul&rdquo; in a machine, and to be honest building it was very fun!. Here is a look at what happens when you build a tool specifically for how your own brain works.</p>
+<div style="display:flex; gap:1rem; flex-wrap:wrap;">
+	<img src="dashboard.png" alt="Dashboard" style="flex:1 1 320px; width:100%; height:auto;" />
+	<img src="projects.png" alt="Projects" style="flex:1 1 320px; width:100%; height:auto;" />
+</div>
+<h3 id="context-shouldnt-be-a-chore">
+  Context shouldn&rsquo;t be a chore
+  <a class="heading-link" href="#context-shouldnt-be-a-chore">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Most AI tools treat every conversation like a first date. In Confucius, I have Memories (facts about me) and Skills (how I want things done).</p>
+<p>If I’m in a coding project, the AI automatically knows I prefer Python type hints and modular architecture because those skills are pinned to the project. I don’t &ldquo;harness&rdquo; context; it’s just there.</p>
+<div style="display:flex; gap:1rem; flex-wrap:wrap; margin:1rem 0;">
+  <iframe
+    style="flex:1 1 320px; width:100%; aspect-ratio:16/9; border:0;"
+    src="https://www.youtube.com/embed/akcJm2d9opY"
+    title="Confucius app demo: memory and skills workflow"
+    aria-label="Confucius app demo: memory and skills workflow"
+    allowfullscreen>
+  </iframe>
+  <iframe
+    style="flex:1 1 320px; width:100%; aspect-ratio:16/9; border:0;"
+    src="https://www.youtube.com/embed/f-A6Wox352w"
+    title="Confucius app demo: second workflow"
+    aria-label="Confucius app demo: second workflow"
+    allowfullscreen>
+  </iframe>
+</div>
+<h3 id="gathering-dots-without-losing-my-mind">
+  Gathering Dots (Without Losing My Mind)
+  <a class="heading-link" href="#gathering-dots-without-losing-my-mind">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Building side projects and falling down rabbit holes is messy. You spot a clever UI trick, read a deep-dive on a niche topic you&rsquo;re suddenly obsessed with, or uncover a weird bug fix you know you&rsquo;ll need later.</p>
+<p>In the past, my solution was just dumping links into a Notion board. But that meant hoarding entire articles or massive documentation pages when I really only cared about one specific code block or a single paragraph. Months later, when I actually needed that insight, I’d have to sift through the entire link again just to find the tiny fragment I cared about.</p>
+<p>To handle this, I built my own browser extensions for Chrome and Firefox. So when I find something fascinating, I just clip it. The app&rsquo;s server catches it and categorizes it as a &ldquo;Memory&rdquo; or a &ldquo;Skill&rdquo;, it also  allows me to automatically summarizes it if i want. Later, when I start a new project, I just attach those specific memories/skills and the AI instantly adopts all that context without me having to type a massive prompt.</p>
+<div style="max-width: 500px; margin: 1rem auto;">
+  <iframe
+    width="100%"
+    style="aspect-ratio:16/9; border:0;"
+    src="https://www.youtube.com/embed/AAxJtDe7yD0"
+    title="Confucius browser extension demo"
+    allowfullscreen>
+  </iframe>
+</div>
+<h3 id="a-memory-that-actually-lasts">
+  A Memory That Actually Lasts
+  <a class="heading-link" href="#a-memory-that-actually-lasts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Standard AI forgets everything the moment you clear the chat, I needed a tool that remembered my past explorations.
+So i add to it a Long-Term Memory (RAG) pipeline that’s strictly mine. When I archive a project, the system extracts discrete facts and stores them in a local vector database.</p>
+<p>Months later, when I ask a question in a new chat, the system does a quick &ldquo;KNN search&rdquo; and pulls in relevant facts from my past work. It’s a bridge between the &ldquo;me&rdquo; from six months ago and the &ldquo;me&rdquo; today.</p>
+<div style="display:flex; gap:1rem; flex-wrap:wrap;">
+	<img src="ltm-1.png" alt="LTM 1" style="flex:1 1 320px; width:100%; height:auto;" />
+	<img src="ltm-2.png" alt="LTM 2" style="flex:1 1 320px; width:100%; height:auto;" />
+</div>
+<h3 id="the-idea-collider-engine">
+  The Idea Collider Engine
+  <a class="heading-link" href="#the-idea-collider-engine">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This is the feature I am most proud of. Sometimes you don&rsquo;t need answers; you need a fresh perspective. I don&rsquo;t just want the AI to agree with me; I want it to challenge me. I built an algorithm based on Structure-Mapping Theory.</p>
+<p>I give it a &ldquo;shower thought,&rdquo; and the engine finds a memory that is semantically distant (a completely different topic) but structurally similar (the same underlying mechanism). [See this article to get more info about the algorithm]</p>
+<p>It takes those three completely unrelated things, smashes them together, and forces the AI to synthesize a brand-new concept based on Structure-Mapping Theory.</p>
+<p>The result? Novel insights that a standard chatbot would never find because it’s too busy being &ldquo;helpful&rdquo; and literal.</p>
+<div style="display:flex; gap:1rem; flex-wrap:wrap;">
+	<img src="ideia-col-1.png" alt="ideia Collision 1" style="flex:1 1 320px; width:100%; height:auto;" />
+	<img src="ideia-col-2.png" alt="ideia Collision 2" style="flex:1 1 320px; width:100%; height:auto;" />
+</div>
+<h3 id="playing-by-my-own-rules">
+  Playing by My Own Rules
+  <a class="heading-link" href="#playing-by-my-own-rules">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Because this tool is just for me, I didn&rsquo;t have to compromise on the under-the-hood stuff:</p>
+<ul>
+<li><strong>True Integrations:</strong> I wired up the Model Context Protocol (MCP). This lets the AI actually talk to my local tools and databases, like my GitHub repos, in real-time.</li>
+<li><strong>Total Privacy:</strong> When I&rsquo;m working on something sensitive, I can route the chat through local, open-source models like Llama 3 via Ollama.</li>
+<li><strong>No Hidden Prompts:</strong> Every single system prompt—from the web clipper summarizer to the ghost text autocomplete, Structural Abstraction Prompt, Collision Synthesis Prompt and others, are fully exposed in the settings for me to tweak.</li>
+<li><strong>Counting Pennies:</strong> API calls cost money. So, I built a consumption dashboard that tracks my token usage across chats, notes, and background jobs, estimating the exact cost per model.</li>
+</ul>
+<div style="display:flex; gap:1rem; flex-wrap:wrap;">
+	<img src="integrations.png" alt="MCP" style="flex:1 1 320px; width:100%; height:auto;" />
+	<img src="consumptions.png" alt="Consumo" style="flex:1 1 320px; width:100%; height:auto;" />
+</div>
+<div style="display:flex; gap:1rem; flex-wrap:wrap;">
+	<img src="settings.png" alt="MCP" style="flex:1 1 320px; width:100%; height:auto;" />
+	<img src="consumptions.png" alt="Consumo" style="flex:1 1 320px; width:100%; height:auto;" />
+</div>
+<h3 id="the-so-what">
+  The So What?
+  <a class="heading-link" href="#the-so-what">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Building this wasn&rsquo;t about &ldquo;disrupting the productivity space.&rdquo; It was about the sheer joy of crafting a tool that perfectly fits the weird, non-linear way I do things. It feels less like a piece of software and more like a digital extension of my own curiosity.</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css"
+    integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"
+    integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,
+      {
+        delimiters: [
+          {left: '$$', right: '$$', display:true},
+          {left: '$', right: '$', display:false},
+          {left: '\\(', right: '\\)', display: false},
+          {left: '\\[', right: '\\]', display: true}
+        ]
+      }
+    );"></script>
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2026
+     Tiago Portela 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

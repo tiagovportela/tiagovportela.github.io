@@ -6,8 +6,15 @@
     <description>Recent content on Tiago Portela</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 02 Mar 2026 15:59:50 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>http://localhost:1313/posts/confucius-app/</link>
+      <pubDate>Mon, 02 Mar 2026 15:59:50 +0000</pubDate>
+      <guid>http://localhost:1313/posts/confucius-app/</guid>
+      <description>&lt;h1 id=&#34;why-i-built-my-own-second-brain-just-for-the-fun-of-it&#34;&gt;&#xA;  Why I Built My Own &amp;ldquo;Second Brain&amp;rdquo; Just for the Fun of It&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#why-i-built-my-own-second-brain-just-for-the-fun-of-it&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Let’s be honest: the world didn’t need another note-taking app. Between Notion, Obsidian, and the graveyard of productivity tools on my hard drive, I was &amp;ldquo;covered.&amp;rdquo; But I had a problem.&lt;/p&gt;&#xA;&lt;p&gt;For years, I bounced between every note-taking app on the market. But they all felt like digital filing cabinets, great for accumulating links, and &amp;ldquo;shower ideias&amp;rdquo;, but terrible for actually &lt;em&gt;thinking&lt;/em&gt;. I didn&amp;rsquo;t want a place to just dump my ideias/research. I wanted a brainstorming partner. I wanted a tool that could help me explore ideas, design better systems, and connect dots I couldn&amp;rsquo;t see.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Hello World</title>
       <link>http://localhost:1313/posts/hello-world/</link>
