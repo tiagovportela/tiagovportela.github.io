@@ -5,8 +5,8 @@ title = "Why I Built My Own 'Second Brain' Just for the Fun of It"
 description = ""
 slug = ""
 authors = []
-tags = []
-categories = []
+tags = ["AI", "Side Project", "Productivity", "RAG"]
+categories = ["engineering", "projects"]
 externalLink = ""
 series = []
 +++

@@ -7,7 +7,7 @@ theme = 'hugo-coder'
     author = "Tiago Portela"
     description = "A minimalist blog"
     keywords = "blog,developer,personal"
-    info = "Full Stack Developer"
+    info = "Algorithms software Engineer"
     avatarurl = "images/avatar.png" # Place an image in static/images/
     customCSS = ["css/custom.css"]
     math = true
@@ -22,7 +22,7 @@ theme = 'hugo-coder'
   name = "LinkedIn"
   icon = "fa fa-2x fa-linkedin"
   weight = 2
-  url = "https://www.linkedin.com/in/tiagovportela/"
+  url = "https://www.linkedin.com/in/tiago-portela-394512298/"
 
 [taxonomies]
   category = "categories"

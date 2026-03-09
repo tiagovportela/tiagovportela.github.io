@@ -6,14 +6,14 @@
     <description>Recent content on Tiago Portela</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 19 Jan 2026 16:23:47 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Hello World</title>
-      <link>http://localhost:1313/posts/hello-world/</link>
-      <pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/hello-world/</guid>
-      <description>&lt;p&gt;Welcome to my blog! This is my first post where I share a bit about myself and what you can expect from this space.&lt;/p&gt;&#xA;&lt;h2 id=&#34;about-me&#34;&gt;&#xA;  About Me&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#about-me&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;m a Full Stack Developer passionate about building great software. I love exploring new technologies and finding elegant solutions to complex problems.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-to-expect&#34;&gt;&#xA;  What to Expect&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#what-to-expect&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;In this blog, I plan to write about:&lt;/p&gt;</description>
+      <title>Teaching My AI Assistant to Go Grocery Shopping</title>
+      <link>http://localhost:1313/posts/supermarket-mcp-server/</link>
+      <pubDate>Mon, 19 Jan 2026 16:23:47 +0000</pubDate>
+      <guid>http://localhost:1313/posts/supermarket-mcp-server/</guid>
+      <description>&lt;h1 id=&#34;teaching-my-ai-assistant-to-go-grocery-shopping&#34;&gt;&#xA;  Teaching My AI Assistant to Go Grocery Shopping&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#teaching-my-ai-assistant-to-go-grocery-shopping&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Let me set the scene. It is a Sunday afternoon, I am sitting on the couch trying to plan the weekly grocery run, and I have three browser tabs open: Continente, Aldi, and Pingo Doce. I am doing what every price-conscious Portuguese person does — comparing the price of bananas across three different supermarkets. Tab-switching, squinting at unit prices, trying to remember if &amp;ldquo;per unit&amp;rdquo; means per kilogram or per piece. It is tedious. It is boring. And I am an engineer. So naturally, instead of spending 15 minutes comparing prices, I spent my weekends building a system that does it for me.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Why I Built My Own &#39;Second Brain&#39; Just for the Fun of It</title>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Teaching My AI Assistant to Go Grocery Shopping · Tiago Portela
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Tiago Portela">
+<meta name="description" content="Building an MCP server that lets an AI assistant search and compare prices across Portuguese supermarkets in real time.">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Teaching My AI Assistant to Go Grocery Shopping">
+  <meta name="twitter:description" content="Building an MCP server that lets an AI assistant search and compare prices across Portuguese supermarkets in real time.">
+
+<meta property="og:url" content="http://localhost:1313/posts/supermarket-mcp-server/">
+  <meta property="og:site_name" content="Tiago Portela">
+  <meta property="og:title" content="Teaching My AI Assistant to Go Grocery Shopping">
+  <meta property="og:description" content="Building an MCP server that lets an AI assistant search and compare prices across Portuguese supermarkets in real time.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-01-19T16:23:47+00:00">
+    <meta property="article:modified_time" content="2026-01-19T16:23:47+00:00">
+    <meta property="article:tag" content="AI">
+    <meta property="article:tag" content="Mcp">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Scraping">
+    <meta property="article:tag" content="Side-Project">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/supermarket-mcp-server/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+
+
+ 
+  
+    
+    <link rel="stylesheet" href="/css/custom.css" media="screen">
+  
+
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+<body class="preload-transitions colorscheme-light">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Tiago Portela
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/supermarket-mcp-server/">
+              Teaching My AI Assistant to Go Grocery Shopping
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2026-01-19T16:23:47Z">
+                January 19, 2026
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              8-minute read
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/categories/projects/">Projects</a>
+      <span class="separator">•</span>
+    <a href="/categories/engineering/">Engineering</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/ai/">AI</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/mcp/">Mcp</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/python/">Python</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/scraping/">Scraping</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/side-project/">Side-Project</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h1 id="teaching-my-ai-assistant-to-go-grocery-shopping">
+  Teaching My AI Assistant to Go Grocery Shopping
+  <a class="heading-link" href="#teaching-my-ai-assistant-to-go-grocery-shopping">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p>Let me set the scene. It is a Sunday afternoon, I am sitting on the couch trying to plan the weekly grocery run, and I have three browser tabs open: Continente, Aldi, and Pingo Doce. I am doing what every price-conscious Portuguese person does — comparing the price of bananas across three different supermarkets. Tab-switching, squinting at unit prices, trying to remember if &ldquo;per unit&rdquo; means per kilogram or per piece. It is tedious. It is boring. And I am an engineer. So naturally, instead of spending 15 minutes comparing prices, I spent my weekends building a system that does it for me.</p>
+<p>The result is <strong>Supermarket MCP Server</strong> — a tool that lets AI assistants search for products and compare prices across Portuguese supermarkets in real time. No browser tabs. No mental arithmetic. Just ask.</p>
+<h2 id="the-idea-what-if-my-ai-could-read-supermarket-websites">
+  The Idea: What If My AI Could Read Supermarket Websites?
+  <a class="heading-link" href="#the-idea-what-if-my-ai-could-read-supermarket-websites">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>If you read my previous post, you know I built <a href="https://tiagoportela.com/blog/confucius/"  class="external-link" target="_blank" rel="noopener">Confucius</a> — a personal AI dashboard that lives inside my projects. One of its key features is MCP (Model Context Protocol) integration, which lets the AI actually talk to external tools and data sources in real time. Think of it as giving the AI hands. Instead of just answering questions from its training data, an MCP server allows the AI to actually reach out and do things — query databases, call APIs, scrape websites.</p>
+<p>I looked at this and thought: what if I gave Confucius the ability to search supermarket catalogues? Not a static database of prices that goes stale in a day, but a live connection to the actual store websites. The AI could search, compare, and recommend — all in real time.</p>
+<h2 id="the-architecture-one-interface-multiple-scrapers">
+  The Architecture: One Interface, Multiple Scrapers
+  <a class="heading-link" href="#the-architecture-one-interface-multiple-scrapers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>The core challenge is that every supermarket website works differently. Continente renders server-side HTML with product tiles you can parse. Aldi, on the other hand, uses Algolia as their search backend — meaning there is a clean JSON API hiding behind the storefront if you know where to look.</p>
+<p>I needed a design that could handle both approaches without the MCP server caring about the difference. The solution is a classic abstraction layer:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BaseApi</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_products_by_name</span>(self, query: str) <span style="color:#f92672">-&gt;</span> list[Product]:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">NotImplementedError</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_products_by_brand</span>(self, brand: str, query: str) <span style="color:#f92672">-&gt;</span> list[Product]:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">NotImplementedError</span>
+</span></span></code></pre></div><p>Every supermarket implements this interface. A simple registry maps store names to their implementations:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>_apis <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;continente&#34;</span>: ContinenteApi(),
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;aldi&#34;</span>: AldiApi(),
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_api</span>(name: str):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> name <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> _apis:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Unknown service: </span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">. Available: </span><span style="color:#e6db74">{</span><span style="color:#e6db74">&#39;, &#39;</span><span style="color:#f92672">.</span>join(_apis)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> _apis[name]
+</span></span></code></pre></div><p>Adding a new supermarket is just a matter of writing a new class that implements the same interface and registering it. The MCP server never needs to change.</p>
+<h2 id="two-supermarkets-two-completely-different-strategies">
+  Two Supermarkets, Two Completely Different Strategies
+  <a class="heading-link" href="#two-supermarkets-two-completely-different-strategies">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>This was the most interesting part of the build. The same problem — &ldquo;find products matching a search query&rdquo; — required completely different engineering approaches depending on the supermarket.</p>
+<h3 id="continente-old-school-html-scraping">
+  Continente: Old-School HTML Scraping
+  <a class="heading-link" href="#continente-old-school-html-scraping">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Continente renders its search results as server-side HTML. To extract products, I send a GET request to their search endpoint and parse the response with BeautifulSoup:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ContinenteApi</span>(BaseApi):
+</span></span><span style="display:flex;"><span>    BASE_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://www.continente.pt/pesquisa/&#34;</span>
+</span></span><span style="display:flex;"><span>    PAGE_SIZE <span style="color:#f92672">=</span> <span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_fetch_page</span>(self, params: dict, start: int) <span style="color:#f92672">-&gt;</span> BeautifulSoup:
+</span></span><span style="display:flex;"><span>        full_params <span style="color:#f92672">=</span> {<span style="color:#f92672">**</span>params, <span style="color:#e6db74">&#34;start&#34;</span>: start, <span style="color:#e6db74">&#34;sz&#34;</span>: self<span style="color:#f92672">.</span>PAGE_SIZE}
+</span></span><span style="display:flex;"><span>        response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(self<span style="color:#f92672">.</span>BASE_URL, params<span style="color:#f92672">=</span>full_params)
+</span></span><span style="display:flex;"><span>        response<span style="color:#f92672">.</span>raise_for_status()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> BeautifulSoup(response<span style="color:#f92672">.</span>text, <span style="color:#e6db74">&#34;html.parser&#34;</span>)
+</span></span></code></pre></div><p>The product data lives in <code>div</code> elements with specific CSS classes — <code>productTile</code> for each product card, <code>pwc-tile--price-primary</code> for the price, and so on. It is fragile by nature (if they redesign the page, the selectors break), but it works well and handles pagination.</p>
+<p>One thing I had to handle carefully is malformed tiles. Sometimes the HTML is incomplete — a product card missing a price field or a broken link. Rather than crashing the whole search, I skip those tiles and log a warning:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">except</span> (<span style="color:#a6e22e">AttributeError</span>, <span style="color:#a6e22e">TypeError</span>, <span style="color:#a6e22e">KeyError</span>):
+</span></span><span style="display:flex;"><span>    skipped <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">continue</span>
+</span></span></code></pre></div><h3 id="aldi-reverse-engineering-the-algolia-api">
+  Aldi: Reverse-Engineering the Algolia API
+  <a class="heading-link" href="#aldi-reverse-engineering-the-algolia-api">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Aldi was a different story. When I inspected their website&rsquo;s network requests, I discovered they use Algolia — a search-as-a-service platform — as their backend. This means that instead of parsing HTML, I can talk directly to their search API and get clean, structured JSON back.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AldiApi</span>(BaseApi):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_fetch_products</span>(self, params: dict) <span style="color:#f92672">-&gt;</span> list[Product]:
+</span></span><span style="display:flex;"><span>        url <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;https://</span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>ALGOLIA_APP_ID<span style="color:#f92672">.</span>lower()<span style="color:#e6db74">}</span><span style="color:#e6db74">-dsn.algolia.net/1/indexes/*/queries&#34;</span>
+</span></span><span style="display:flex;"><span>        payload <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>dumps({
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;requests&#34;</span>: [
+</span></span><span style="display:flex;"><span>                {<span style="color:#e6db74">&#34;indexName&#34;</span>: <span style="color:#e6db74">&#34;prod_pt_pt_offers&#34;</span>, <span style="color:#e6db74">&#34;query&#34;</span>: params<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;query&#34;</span>), <span style="color:#e6db74">&#34;hitsPerPage&#34;</span>: <span style="color:#ae81ff">20</span>},
+</span></span><span style="display:flex;"><span>                {<span style="color:#e6db74">&#34;indexName&#34;</span>: <span style="color:#e6db74">&#34;prod_pt_pt_assortment&#34;</span>, <span style="color:#e6db74">&#34;query&#34;</span>: params<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;query&#34;</span>), <span style="color:#e6db74">&#34;hitsPerPage&#34;</span>: <span style="color:#ae81ff">20</span>},
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(url, data<span style="color:#f92672">=</span>payload, headers<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>HEADERS)
+</span></span><span style="display:flex;"><span>        r<span style="color:#f92672">.</span>raise_for_status()
+</span></span><span style="display:flex;"><span>        results <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;results&#34;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> [self<span style="color:#f92672">.</span>_parse_product(p) <span style="color:#66d9ef">for</span> h <span style="color:#f92672">in</span> results <span style="color:#66d9ef">for</span> p <span style="color:#f92672">in</span> h<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;hits&#34;</span>, [])]
+</span></span></code></pre></div><p>The Algolia API is publicly accessible (the credentials are embedded in their frontend JavaScript — this is standard for Algolia client-side integrations). The response includes structured fields like <code>productName</code>, <code>salesPrice</code>, and <code>brandName</code>, which makes parsing trivial compared to scraping HTML.</p>
+<p>An interesting detail: Aldi uses two separate Algolia indices — <code>offers</code> for weekly promotions and <code>assortment</code> for their regular catalogue. I query both and merge the results, so the user always sees the full picture.</p>
+<h2 id="the-mcp-layer-giving-the-ai-superpowers">
+  The MCP Layer: Giving the AI Superpowers
+  <a class="heading-link" href="#the-mcp-layer-giving-the-ai-superpowers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>With the scraping infrastructure in place, the MCP layer is clean. I expose two tools and three prompt templates:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a6e22e">@mcp.tool</span>()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">search_products</span>(query: str, store: Literal[<span style="color:#e6db74">&#34;continente&#34;</span>, <span style="color:#e6db74">&#34;aldi&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;continente&#34;</span>) <span style="color:#f92672">-&gt;</span> str:
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Search for products by name in a Portuguese supermarket.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    api <span style="color:#f92672">=</span> get_api(store)
+</span></span><span style="display:flex;"><span>    products <span style="color:#f92672">=</span> api<span style="color:#f92672">.</span>get_products_by_name(query)
+</span></span><span style="display:flex;"><span>    lines <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> p <span style="color:#f92672">in</span> products:
+</span></span><span style="display:flex;"><span>        lines<span style="color:#f92672">.</span>append(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;- </span><span style="color:#e6db74">{</span>p<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">{</span>p<span style="color:#f92672">.</span>price<span style="color:#e6db74">}</span><span style="color:#e6db74"> (</span><span style="color:#e6db74">{</span>p<span style="color:#f92672">.</span>unit_price<span style="color:#e6db74">}</span><span style="color:#e6db74">) - </span><span style="color:#e6db74">{</span>p<span style="color:#f92672">.</span>url<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>join(lines)
+</span></span></code></pre></div><p>But the tools alone are just the low-level building blocks. The real power comes from the <strong>prompt templates</strong> — higher-level instructions that teach the AI how to orchestrate the tools for common tasks:</p>
+<ul>
+<li><strong><code>compare_prices</code></strong> — searches for a product across all stores and recommends the best value</li>
+<li><strong><code>build_shopping_list</code></strong> — takes a list of items, finds each one in every store, and tells you where to buy each item to minimise total cost</li>
+<li><strong><code>find_brand_alternatives</code></strong> — compares a branded product with cheaper alternatives in the same store</li>
+</ul>
+<p>These prompts are essentially recipes. They tell the AI: &ldquo;here is a task, here are the tools you have, go figure it out.&rdquo; The AI handles the rest — making multiple tool calls, comparing results, reasoning about unit prices versus total prices, and presenting a coherent recommendation.</p>
+<h2 id="what-it-looks-like-in-practice">
+  What It Looks Like in Practice
+  <a class="heading-link" href="#what-it-looks-like-in-practice">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Once the server is running, I connect it to Confucius via its MCP integration and have conversations like:</p>
+<blockquote>
+<p>&ldquo;Compare the price of olive oil between Continente and Aldi.&rdquo;</p>
+</blockquote>
+<p>The AI calls <code>search_products</code> twice (once per store), gets back real-time results with prices and unit prices, and gives me a side-by-side comparison with a recommendation.</p>
+<p>Or something more ambitious:</p>
+<blockquote>
+<p>&ldquo;I need to buy milk, eggs, rice, and chicken breast. Where should I shop?&rdquo;</p>
+</blockquote>
+<p>It searches for all four items across both supermarkets and builds an optimised shopping plan — maybe milk and rice from Aldi, eggs and chicken from Continente.</p>
+<p>The AI is doing the boring tab-switching work that I used to do manually. And because it has access to unit prices, it catches things I might miss — like a larger pack being cheaper per kilogram even though the sticker price is higher.</p>
+<div style="display:flex; gap:1rem; flex-wrap:wrap;">
+    <img src="image.png" alt="image" style="flex:1 1 320px; width:100%; height:auto;" />
+    <img src="image-1.png" alt="image-1" style="flex:1 1 320px; width:100%; height:auto;" />
+</div>
+<div style="display:flex; gap:1rem; flex-wrap:wrap;">
+    <img src="image-2.png" alt="image-2" style="flex:1 1 320px; width:100%; height:auto;" />
+</div>
+<h2 id="the-stack">
+  The Stack
+  <a class="heading-link" href="#the-stack">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>The whole thing is deliberately simple:</p>
+<ul>
+<li><strong>Python 3.12</strong> with type hints</li>
+<li><strong>FastMCP</strong> for the MCP server (runs over HTTP on <code>localhost:8080</code>)</li>
+<li><strong>BeautifulSoup</strong> for HTML parsing (Continente)</li>
+<li><strong>Requests</strong> for HTTP calls</li>
+<li><strong>Algolia&rsquo;s public API</strong> for Aldi</li>
+<li><strong>pytest</strong> with mocking for tests</li>
+<li><strong>uv</strong> as the package manager</li>
+</ul>
+<p>No database. No caching layer. No frontend. Just a server that responds to MCP protocol requests. Every search hits the live supermarket data, so the results are always fresh.</p>
+<h2 id="what-i-learned">
+  What I Learned
+  <a class="heading-link" href="#what-i-learned">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Building this was a useful exercise in a few things:</p>
+<p><strong>Websites are not APIs, but sometimes they secretly are.</strong> Continente required traditional scraping, but Aldi had a perfectly usable API hiding in plain sight. Before reaching for BeautifulSoup, it is always worth checking the network tab in your browser&rsquo;s dev tools. You might find a clean JSON endpoint that saves you hours of fragile HTML parsing.</p>
+<p><strong>Abstraction pays off immediately.</strong> The <code>BaseApi</code> pattern meant I could build and test the Aldi integration without touching a single line of the Continente code or the MCP server. When I eventually add Pingo Doce, the same will be true.</p>
+<p><strong>MCP prompts are underrated.</strong> The raw tools are useful, but the prompt templates are what make the system actually pleasant to use. They encode domain knowledge — like &ldquo;always check unit prices, not just sticker prices&rdquo; — into reusable instructions that the AI follows every time.</p>
+<h2 id="what-is-next">
+  What Is Next
+  <a class="heading-link" href="#what-is-next">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>The obvious next step is adding more supermarkets. Pingo Doce is stubbed out but not yet implemented. Beyond that, there are interesting possibilities: tracking prices over time to spot trends, alerting when a product drops below a threshold, or integrating with a meal planning tool to automatically generate optimised shopping lists from recipes.</p>
+<p>But for now, it does what I built it to do. I open Confucius, ask where to buy bananas, and it tells me. No more tab-switching on Sunday afternoons.</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css"
+    integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"
+    integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"
+    integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,
+      {
+        delimiters: [
+          {left: '$$', right: '$$', display:true},
+          {left: '$', right: '$', display:false},
+          {left: '\\(', right: '\\)', display: false},
+          {left: '\\[', right: '\\]', display: true}
+        ]
+      }
+    );"></script>
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2026
+     Tiago Portela 
+    ·
+    
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
