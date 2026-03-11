@@ -8,7 +8,7 @@ theme = 'hugo-coder'
     description = "A minimalist blog"
     keywords = "blog,developer,personal"
     info = "Algorithms software Engineer"
-    avatarurl = "images/avatar.png" # Place an image in static/images/
+    avatarurl = "images/avatar-2.png" # Place an image in static/images/
     customCSS = ["css/custom.css"]
     math = true
 
@@ -32,6 +32,11 @@ theme = 'hugo-coder'
   name = "Blog"
   weight = 1
   url = "posts/"
+
+[[menu.main]]
+  name = "About"
+  weight = 2
+  url = "about/"
 
 [markup]
 [markup.goldmark]

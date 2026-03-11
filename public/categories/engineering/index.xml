@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Engineering on Tiago Portela</title>
-    <link>http://localhost:1313/categories/engineering/</link>
+    <link>https://tiagovportela.github.io/categories/engineering/</link>
     <description>Recent content in Engineering on Tiago Portela</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 19 Jan 2026 16:23:47 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/engineering/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://tiagovportela.github.io/categories/engineering/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Teaching My AI Assistant to Go Grocery Shopping</title>
-      <link>http://localhost:1313/posts/supermarket-mcp-server/</link>
+      <link>https://tiagovportela.github.io/posts/supermarket-mcp-server/</link>
       <pubDate>Mon, 19 Jan 2026 16:23:47 +0000</pubDate>
-      <guid>http://localhost:1313/posts/supermarket-mcp-server/</guid>
+      <guid>https://tiagovportela.github.io/posts/supermarket-mcp-server/</guid>
       <description>&lt;h1 id=&#34;teaching-my-ai-assistant-to-go-grocery-shopping&#34;&gt;&#xA;  Teaching My AI Assistant to Go Grocery Shopping&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#teaching-my-ai-assistant-to-go-grocery-shopping&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Let me set the scene. It is a Sunday afternoon, I am sitting on the couch trying to plan the weekly grocery run, and I have three browser tabs open: Continente, Aldi, and Pingo Doce. I am doing what every price-conscious Portuguese person does — comparing the price of bananas across three different supermarkets. Tab-switching, squinting at unit prices, trying to remember if &amp;ldquo;per unit&amp;rdquo; means per kilogram or per piece. It is tedious. It is boring. And I am an engineer. So naturally, instead of spending 15 minutes comparing prices, I spent my weekends building a system that does it for me.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Why I Built My Own &#39;Second Brain&#39; Just for the Fun of It</title>
-      <link>http://localhost:1313/posts/confucius-app/</link>
+      <link>https://tiagovportela.github.io/posts/confucius-app/</link>
       <pubDate>Sun, 28 Dec 2025 15:59:50 +0000</pubDate>
-      <guid>http://localhost:1313/posts/confucius-app/</guid>
+      <guid>https://tiagovportela.github.io/posts/confucius-app/</guid>
       <description>&lt;h1 id=&#34;why-i-built-my-own-second-brain-just-for-the-fun-of-it&#34;&gt;&#xA;  Why I Built My Own &amp;ldquo;Second Brain&amp;rdquo; Just for the Fun of It&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#why-i-built-my-own-second-brain-just-for-the-fun-of-it&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Let’s be honest: the world didn’t need another note-taking app. Between Notion, Obsidian, and the graveyard of productivity tools on my hard drive, I was &amp;ldquo;covered.&amp;rdquo; But I had a problem.&lt;/p&gt;&#xA;&lt;p&gt;For years, I bounced between every note-taking app on the market. But they all felt like digital filing cabinets, great for accumulating links, and &amp;ldquo;shower ideias&amp;rdquo;, but terrible for actually &lt;em&gt;thinking&lt;/em&gt;. I didn&amp;rsquo;t want a place to just dump my ideias/research. I wanted a brainstorming partner. I wanted a tool that could help me explore ideas, design better systems, and connect dots I couldn&amp;rsquo;t see.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Optimizing Mobile Computer Vision</title>
-      <link>http://localhost:1313/posts/cv-pipeline/</link>
+      <title>From Sequential to Concurrent: How a Pipeline Redesign Doubled Throughput in a Mobile Pose Estimation System </title>
+      <link>https://tiagovportela.github.io/posts/cv-pipeline/</link>
       <pubDate>Mon, 21 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/cv-pipeline/</guid>
+      <guid>https://tiagovportela.github.io/posts/cv-pipeline/</guid>
       <description>&lt;h1 id=&#34;from-sequential-to-concurrent-how-a-pipeline-redesign-doubled-throughput-in-a-mobile-pose-estimation-system&#34;&gt;&#xA;  From Sequential to Concurrent: How a Pipeline Redesign Doubled Throughput in a Mobile Pose Estimation System&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#from-sequential-to-concurrent-how-a-pipeline-redesign-doubled-throughput-in-a-mobile-pose-estimation-system&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Mobile computer vision is brutal on resources. Every millisecond counts, every CPU cycle is contested, and the gap between a smooth real-time experience and a stuttering one is often just a matter of &lt;em&gt;how&lt;/em&gt; you sequence your work — not &lt;em&gt;how much&lt;/em&gt; work you do.&lt;/p&gt;&#xA;&lt;p&gt;This post documents an investigation into improving the frame rate of a pose estimation pipeline running on a smartphone. The original design was sequential: one frame, one thread, one stage at a time. The new design is pipelined: stages run concurrently on dedicated threads, connected by conflated queues. The results reveal a clear throughput–latency trade-off that is worth understanding carefully before choosing one approach over the other.&lt;/p&gt;</description>
     </item>
   </channel>

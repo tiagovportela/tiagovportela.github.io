@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on Tiago Portela</title>
-    <link>http://localhost:1313/tags/python/</link>
+    <link>https://tiagovportela.github.io/tags/python/</link>
     <description>Recent content in Python on Tiago Portela</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 19 Jan 2026 16:23:47 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://tiagovportela.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Teaching My AI Assistant to Go Grocery Shopping</title>
-      <link>http://localhost:1313/posts/supermarket-mcp-server/</link>
+      <link>https://tiagovportela.github.io/posts/supermarket-mcp-server/</link>
       <pubDate>Mon, 19 Jan 2026 16:23:47 +0000</pubDate>
-      <guid>http://localhost:1313/posts/supermarket-mcp-server/</guid>
+      <guid>https://tiagovportela.github.io/posts/supermarket-mcp-server/</guid>
       <description>&lt;h1 id=&#34;teaching-my-ai-assistant-to-go-grocery-shopping&#34;&gt;&#xA;  Teaching My AI Assistant to Go Grocery Shopping&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#teaching-my-ai-assistant-to-go-grocery-shopping&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;Let me set the scene. It is a Sunday afternoon, I am sitting on the couch trying to plan the weekly grocery run, and I have three browser tabs open: Continente, Aldi, and Pingo Doce. I am doing what every price-conscious Portuguese person does — comparing the price of bananas across three different supermarkets. Tab-switching, squinting at unit prices, trying to remember if &amp;ldquo;per unit&amp;rdquo; means per kilogram or per piece. It is tedious. It is boring. And I am an engineer. So naturally, instead of spending 15 minutes comparing prices, I spent my weekends building a system that does it for me.&lt;/p&gt;</description>
     </item>
   </channel>
