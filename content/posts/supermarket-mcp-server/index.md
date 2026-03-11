@@ -186,3 +186,5 @@ Building this was a useful exercise in a few things:
 The obvious next step is adding more supermarkets. Pingo Doce is stubbed out but not yet implemented. Beyond that, there are interesting possibilities: tracking prices over time to spot trends, alerting when a product drops below a threshold, or integrating with a meal planning tool to automatically generate optimised shopping lists from recipes.
 
 But for now, it does what I built it to do. I open Confucius, ask where to buy bananas, and it tells me. No more tab-switching on Sunday afternoons.
+
+
