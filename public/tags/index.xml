@@ -2,101 +2,101 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Tiago Portela</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://tiagovportela.github.io/tags/</link>
     <description>Recent content in Tags on Tiago Portela</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 19 Jan 2026 16:23:47 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://tiagovportela.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Ai</title>
-      <link>http://localhost:1313/tags/ai/</link>
+      <link>https://tiagovportela.github.io/tags/ai/</link>
       <pubDate>Mon, 19 Jan 2026 16:23:47 +0000</pubDate>
-      <guid>http://localhost:1313/tags/ai/</guid>
+      <guid>https://tiagovportela.github.io/tags/ai/</guid>
       <description></description>
     </item>
     <item>
       <title>Mcp</title>
-      <link>http://localhost:1313/tags/mcp/</link>
+      <link>https://tiagovportela.github.io/tags/mcp/</link>
       <pubDate>Mon, 19 Jan 2026 16:23:47 +0000</pubDate>
-      <guid>http://localhost:1313/tags/mcp/</guid>
+      <guid>https://tiagovportela.github.io/tags/mcp/</guid>
       <description></description>
     </item>
     <item>
       <title>Python</title>
-      <link>http://localhost:1313/tags/python/</link>
+      <link>https://tiagovportela.github.io/tags/python/</link>
       <pubDate>Mon, 19 Jan 2026 16:23:47 +0000</pubDate>
-      <guid>http://localhost:1313/tags/python/</guid>
+      <guid>https://tiagovportela.github.io/tags/python/</guid>
       <description></description>
     </item>
     <item>
       <title>Scraping</title>
-      <link>http://localhost:1313/tags/scraping/</link>
+      <link>https://tiagovportela.github.io/tags/scraping/</link>
       <pubDate>Mon, 19 Jan 2026 16:23:47 +0000</pubDate>
-      <guid>http://localhost:1313/tags/scraping/</guid>
+      <guid>https://tiagovportela.github.io/tags/scraping/</guid>
       <description></description>
     </item>
     <item>
-      <title>Side Project</title>
-      <link>http://localhost:1313/tags/side-project/</link>
+      <title>Side-Project</title>
+      <link>https://tiagovportela.github.io/tags/side-project/</link>
       <pubDate>Mon, 19 Jan 2026 16:23:47 +0000</pubDate>
-      <guid>http://localhost:1313/tags/side-project/</guid>
+      <guid>https://tiagovportela.github.io/tags/side-project/</guid>
       <description></description>
     </item>
     <item>
       <title>Productivity</title>
-      <link>http://localhost:1313/tags/productivity/</link>
+      <link>https://tiagovportela.github.io/tags/productivity/</link>
       <pubDate>Sun, 28 Dec 2025 15:59:50 +0000</pubDate>
-      <guid>http://localhost:1313/tags/productivity/</guid>
+      <guid>https://tiagovportela.github.io/tags/productivity/</guid>
       <description></description>
     </item>
     <item>
       <title>RAG</title>
-      <link>http://localhost:1313/tags/rag/</link>
+      <link>https://tiagovportela.github.io/tags/rag/</link>
       <pubDate>Sun, 28 Dec 2025 15:59:50 +0000</pubDate>
-      <guid>http://localhost:1313/tags/rag/</guid>
+      <guid>https://tiagovportela.github.io/tags/rag/</guid>
       <description></description>
     </item>
     <item>
       <title>Computer-Vision</title>
-      <link>http://localhost:1313/tags/computer-vision/</link>
+      <link>https://tiagovportela.github.io/tags/computer-vision/</link>
       <pubDate>Mon, 21 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/computer-vision/</guid>
+      <guid>https://tiagovportela.github.io/tags/computer-vision/</guid>
       <description></description>
     </item>
     <item>
       <title>Mobile</title>
-      <link>http://localhost:1313/tags/mobile/</link>
+      <link>https://tiagovportela.github.io/tags/mobile/</link>
       <pubDate>Mon, 21 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/mobile/</guid>
+      <guid>https://tiagovportela.github.io/tags/mobile/</guid>
       <description></description>
     </item>
     <item>
       <title>Multithreading</title>
-      <link>http://localhost:1313/tags/multithreading/</link>
+      <link>https://tiagovportela.github.io/tags/multithreading/</link>
       <pubDate>Mon, 21 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/multithreading/</guid>
+      <guid>https://tiagovportela.github.io/tags/multithreading/</guid>
       <description></description>
     </item>
     <item>
       <title>Optimization</title>
-      <link>http://localhost:1313/tags/optimization/</link>
+      <link>https://tiagovportela.github.io/tags/optimization/</link>
       <pubDate>Mon, 21 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/optimization/</guid>
+      <guid>https://tiagovportela.github.io/tags/optimization/</guid>
       <description></description>
     </item>
     <item>
       <title>Parallel-Computing</title>
-      <link>http://localhost:1313/tags/parallel-computing/</link>
+      <link>https://tiagovportela.github.io/tags/parallel-computing/</link>
       <pubDate>Mon, 21 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/parallel-computing/</guid>
+      <guid>https://tiagovportela.github.io/tags/parallel-computing/</guid>
       <description></description>
     </item>
     <item>
       <title>Producer-Consumer</title>
-      <link>http://localhost:1313/tags/producer-consumer/</link>
+      <link>https://tiagovportela.github.io/tags/producer-consumer/</link>
       <pubDate>Mon, 21 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/producer-consumer/</guid>
+      <guid>https://tiagovportela.github.io/tags/producer-consumer/</guid>
       <description></description>
     </item>
   </channel>
