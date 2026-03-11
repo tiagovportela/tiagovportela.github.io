@@ -9,7 +9,7 @@
     <lastBuildDate>Mon, 21 Jul 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/multithreading/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Optimizing Mobile Computer Vision</title>
+      <title>From Sequential to Concurrent: How a Pipeline Redesign Doubled Throughput in a Mobile Pose Estimation System </title>
       <link>http://localhost:1313/posts/cv-pipeline/</link>
       <pubDate>Mon, 21 Jul 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/cv-pipeline/</guid>

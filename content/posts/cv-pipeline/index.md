@@ -1,5 +1,5 @@
 +++ 
-title = "Optimizing Mobile Computer Vision"
+title = "From Sequential to Concurrent: How a Pipeline Redesign Doubled Throughput in a Mobile Pose Estimation System "
 date = "2025-07-21"
 draft = false
 description = "How I optimized a real-time pose estimation pipeline."

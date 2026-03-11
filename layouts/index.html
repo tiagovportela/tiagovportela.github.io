@@ -1,0 +1,45 @@
+{{ define "content" }}
+  <section class="container page">
+    <div class="home-avatar">
+      <img src="{{ .Site.Params.avatarURL | relURL }}" alt="{{ .Site.Params.author }}">
+      <div class="home-social">
+        {{ with .Site.Params.social }}
+          {{ range sort . "weight" }}
+            <a href="{{ .url | safeURL }}" aria-label="{{ .name }}" target="_blank" rel="noopener">
+              <i class="{{ .icon }}" aria-hidden="true"></i>
+            </a>
+          {{ end }}
+        {{ end }}
+      </div>
+    </div>
+
+    <article>
+      {{ .Content }}
+    </article>
+
+    <section class="home-github-chart">
+      <h2>Contributions</h2>
+      <a href="https://github.com/tiagovportela" target="_blank" rel="noopener">
+        <img src="https://ghchart.rshah.org/tiagovportela" alt="GitHub Contributions Chart">
+      </a>
+    </section>
+
+    <section class="home-posts-section">
+      <h2>Posts</h2>
+      <ul class="home-posts-list">
+        {{ range where .Site.RegularPages "Type" "posts" }}
+        <li class="home-post-item">
+          <span class="home-post-date">{{ .Date.Format (.Site.Params.dateFormat | default "Jan 2, 2006") }}</span>
+          <div class="home-post-details">
+            <div class="home-post-header">
+              <a class="home-post-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+              <span class="home-post-reading-time"><span class="home-post-sep">&middot;</span>{{ .ReadingTime }} min read</span>
+            </div>
+
+          </div>
+        </li>
+        {{ end }}
+      </ul>
+    </section>
+  </section>
+{{ end }}
